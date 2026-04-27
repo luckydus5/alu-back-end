@@ -12,11 +12,11 @@ if __name__ == "__main__":
         sys.exit(1)
 
     employee_id = sys.argv[1]
-    
+
     url = "https://jsonplaceholder.typicode.com/"
     user = requests.get(url + "users/{}".format(employee_id)).json()
     username = user.get("username")
-    
+
     todos = requests.get(url + "todos", params={"userId": employee_id}).json()
 
     dictionary = {
@@ -28,6 +28,6 @@ if __name__ == "__main__":
             } for task in todos
         ]
     }
-    
+
     with open("{}.json".format(employee_id), "w") as jsonfile:
         json.dump(dictionary, jsonfile)
